@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Textform from "./Component/Textform";
+import { useState } from "react";
+import About from "./Component/About";
+import {Route,Routes,} from "react-router-dom";
 
 function App() {
+  const [mode, setMode] = useState("light");
+  const handleMode = () => {
+    if (mode === "light") {
+      setMode("dark");
+      document.body.style.backgroundColor = "grey";
+    } else {
+      setMode("light");
+      document.body.style.backgroundColor = "white";
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <Routes>
+          <Route path="/" element={ <Textform handleMode={handleMode} mode={mode} />} />
+          <Route path="/about" element={<About mode={mode} handleMode={handleMode} />} />
+        </Routes>
   );
 }
-
 export default App;
